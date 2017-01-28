@@ -46,3 +46,23 @@ export function getPosts(req, res) {
     }
   })
 }
+
+/**
+ * GET /api/posts/:postId
+ * Delete a post
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function deletePost(req, res) {
+	console.log(req.params.postId);
+	Post.findOne({ title: req.params.postId }).exec((err, post) => {
+		if (err) {
+			res.status(500).send(err);
+		}
+
+		post.remove(() => {
+			res.status(200).end();
+		});
+	});
+}

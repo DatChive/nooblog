@@ -14,6 +14,10 @@ class HomeStore {
   onGetPostsFail(errorMessage) {
     toastr.error(errorMessage);
   }
+
+	onDeletePostFail(errorMessage) {
+		toastr.error(errorMessage);
+	}
 }
 
 export default alt.createStore(HomeStore);

@@ -18,15 +18,24 @@ class Home extends React.Component {
   onChange(state) {
     this.setState(state);
   }
+  handleDelete(postId) {
+    if(postId) {
+      HomeActions.deletePost(postId);
+			var posts = this.state.posts.filter(function(post) { return post.title != postId });
+			this.setState({ posts: posts });
+    }
+  }
   render() {
     var postNodes = this.state.posts.map((post, index) => {
       return (
         <div key={post.title} className='list-group-item animated fadeIn'>
           <div className='media'>
             <span className='position pull-left' />
-            <div className='pull-left thumb-lg'>
+            <div>
               <h1>{post.title}</h1>
               <p>{post.body}</p>
+              <button onClick={this.handleDelete.bind(this, post.title)} className="btn btn-warning">Delete</button>
+              <button className="btn btn-info">Edit</button>
             </div>
           </div>
         </div>

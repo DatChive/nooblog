@@ -10,10 +10,7 @@ router.route('/posts').get(PostController.getPosts);
 // Add a new Post
 router.route('/posts').post(PostController.addPost);
 
-// TODO: Get read/delete post
-// router.route('/posts/:cuid').get(PostController.getPost);
-//
-// // Delete a post by cuid
-// router.route('/posts/:cuid').delete(PostController.deletePost);
+// Delete a Post
+router.route('/posts/:postId').get(PostController.deletePost);
 
 module.exports = router;

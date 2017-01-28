@@ -4,7 +4,8 @@ class HomeActions {
   constructor() {
     this.generateActions(
       'getPostsSuccess',
-      'getPostsFail'
+      'getPostsFail',
+			'deletePostFail'
     );
   }
 
@@ -19,6 +20,18 @@ class HomeActions {
         this.actions.getPostsFail(jqXhr.responseJSON.message);
       });
   }
+
+	deletePost(postId) {
+  	console.log('postID: ' + postId)
+		$.ajax({url: '/api/posts/' + postId})
+			.done(() => {
+				console.log("successful delete")
+			})
+			.fail(jqXhr => {
+				console.log("fail")
+				this.actions.deletePostFail(jqXhr.responseJSON.message);
+			});
+	}
 }
 
 export default alt.createActions(HomeActions);
