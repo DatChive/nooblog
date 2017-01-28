@@ -17,7 +17,7 @@ export function connectDB() {
 // CONNECTION EVENTS
 // When successfully connected
 mongoose.connection.on('connected', () => {
-	console.log('Mongoose default connection open to ' + dbURI)
+	console.log('Mongoose default connection open to ' + config.databaseURI)
 })
 
 // If the connection throws an error
