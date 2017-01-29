@@ -10,6 +10,10 @@
   "babel": {
     "presets": ["es2015", "react"]
   },
+  "engines": {
+    "npm": "4.0.5",
+    "node": "7.2.1"
+  },
   "dependencies": {
     "alt": "^0.17.8",
     "async": "^1.5.0",
