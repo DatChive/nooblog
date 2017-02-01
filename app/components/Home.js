@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeStore from '../stores/HomeStore'
 import HomeActions from '../actions/HomeActions';
+import {Link} from 'react-router';
 
 class Home extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Home extends React.Component {
   render() {
     var postNodes = this.state.posts.map((post, index) => {
       return (
-        <div key={post.title} className='list-group-item animated fadeIn'>
+        <div key={post.title} className='list-group-item animated fadeIn col-md-6'>
           <div className='media'>
             <span className='position pull-left' />
             <div>
@@ -36,6 +37,7 @@ class Home extends React.Component {
               <p>{post.body}</p>
               <button onClick={this.handleDelete.bind(this, post.title)} className="btn btn-warning">Delete</button>
               <button className="btn btn-info">Edit</button>
+              <Link to={'/view/' + post.title}><button className="btn btn-primary">View</button></Link>
             </div>
           </div>
         </div>

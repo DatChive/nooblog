@@ -8,14 +8,14 @@ import Post from '../../models/post';
  * @returns void
 */
 export function addPost(req, res) {
-  var title = req.body.title;
-  var body = req.body.body;
+  const title = req.body.title;
+	const body = req.body.body;
 
   Post.findOne({title: title}, function (err, post) {
     if (post) {
       return res.status(409).send({message: post.title + ' is already in the database.'});
     } else {
-      var newPost = Post({
+      let newPost = Post({
         title: title,
         body: body
       });
@@ -23,7 +23,7 @@ export function addPost(req, res) {
         if (err) {
           return next(err);
         }
-        res.send('Record Added');
+        return res.send('Record Added');
       });
     }
   });
@@ -37,14 +37,32 @@ export function addPost(req, res) {
  * @returns void
  */
 export function getPosts(req, res) {
-  Post.find().exec(function (err, posts) {
-    if (err) {
-      return next(err);
-    }
-    else {
-      return res.send(posts)
-    }
-  })
+	Post.find().exec(function (err, posts) {
+		if (err) {
+			return next(err);
+		}
+		else {
+			return res.send(posts)
+		}
+	})
+}
+
+/**
+ * GET /api/post/:postId
+ * Get single post
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function getPost(req, res) {
+	Post.findOne({ title: req.params.postId }).exec(function (err, post) {
+		if (err) {
+			return next(err);
+		}
+		else {
+			return res.send(post)
+		}
+	})
 }
 
 /**
@@ -55,14 +73,13 @@ export function getPosts(req, res) {
  * @returns void
  */
 export function deletePost(req, res) {
-	console.log(req.params.postId);
 	Post.findOne({ title: req.params.postId }).exec((err, post) => {
 		if (err) {
-			res.status(500).send(err);
+			return res.status(500).send(err);
 		}
 
 		post.remove(() => {
-			res.status(200).end();
+			return res.status(200).end();
 		});
 	});
 }

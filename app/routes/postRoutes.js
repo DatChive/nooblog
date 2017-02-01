@@ -1,11 +1,14 @@
 import { Router } from 'express';
 import * as PostController from '../controllers/postController';
 
-var express = require('express')
+const express = require('express')
   , router = express.Router();
 
 // Get all Posts
 router.route('/posts').get(PostController.getPosts);
+
+// Get a single post
+router.route('/post/:postId').get(PostController.getPost);
 
 // Add a new Post
 router.route('/posts').post(PostController.addPost);
