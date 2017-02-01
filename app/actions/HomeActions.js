@@ -22,7 +22,6 @@ class HomeActions {
   }
 
 	deletePost(postId) {
-  	console.log('postID: ' + postId)
 		$.ajax({url: '/api/posts/' + postId})
 			.done(() => {
 				console.log("successful delete")
