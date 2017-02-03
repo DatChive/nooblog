@@ -14,10 +14,11 @@ Iterative learning through the MERN stack
 ###Running the app
 1. Make sure mongo is running on port 27017 (mongod)
 2. Open 2 shells/command prompts (point to project root)
-2. Run the following in order
+3. Run the following in order
   * [shell 1] bower install
   * [shell 1] gulp (consumes shell)
   * [shell 2] npm start ('nodeman start' to enable watch)
+4. App is accessible via http://localhost:3000
   
 ###Tech Stack  
   + Mongo shell 3.4.1
