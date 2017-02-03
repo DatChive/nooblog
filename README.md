@@ -19,6 +19,11 @@ Iterative learning through the MERN stack
   * [shell 1] gulp (consumes shell)
   * [shell 2] npm start ('nodeman start' to enable watch)
 4. App is accessible via http://localhost:3000
+
+###Testing
+1. Make sure mongo is running
+2. Make sure your node server is NOT running
+3. point terminal to >app\test and type 'mocha apiSpec.js'
   
 ###Tech Stack  
   + Mongo shell 3.4.1
