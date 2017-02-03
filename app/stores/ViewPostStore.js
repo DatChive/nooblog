@@ -9,8 +9,8 @@ class ViewPostStore {
   }
 
 	onGetPostSuccess(data) {
-		this.title = data.title
-		this.body = data.body
+		this.title = data.post.title
+		this.body = data.post.body
 	}
 
 	onGetPostFail(errorMessage) {

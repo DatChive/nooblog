@@ -9,24 +9,21 @@ import Post from '../../models/post';
 */
 export function addPost(req, res) {
   const title = req.body.title;
-	const body = req.body.body;
 
   Post.findOne({title: title}, function (err, post) {
     if (post) {
-      return res.status(409).send({message: post.title + ' is already in the database.'});
+      res.status(409).send({ message: post.title + ' is already in the database.' })
     } else {
-      let newPost = Post({
-        title: title,
-        body: body
-      });
+      let newPost = Post(req.body);
       newPost.save(function (err) {
         if (err) {
-          return next(err);
-        }
-        return res.send('Record Added');
-      });
+          res.send(err)
+        } else {
+          res.json({ message: 'Post Added', newPost })
+				}
+      })
     }
-  });
+  })
 }
 
 /**
@@ -39,10 +36,10 @@ export function addPost(req, res) {
 export function getPosts(req, res) {
 	Post.find().exec(function (err, posts) {
 		if (err) {
-			return next(err);
+			res.send(err)
 		}
 		else {
-			return res.send(posts)
+			res.send(posts)
 		}
 	})
 }
@@ -57,10 +54,10 @@ export function getPosts(req, res) {
 export function getPost(req, res) {
 	Post.findOne({ title: req.params.postId }).exec(function (err, post) {
 		if (err) {
-			return next(err);
+			res.send(err)
 		}
 		else {
-			return res.send(post)
+			return res.json({ post: post })
 		}
 	})
 }
@@ -75,11 +72,11 @@ export function getPost(req, res) {
 export function deletePost(req, res) {
 	Post.findOne({ title: req.params.postId }).exec((err, post) => {
 		if (err) {
-			return res.status(500).send(err);
+			res.status(500).send(err)
 		}
 
 		post.remove(() => {
-			return res.status(200).end();
-		});
-	});
+			res.status(200).end()
+		})
+	})
 }
