@@ -16,4 +16,8 @@ router.route('/posts').post(PostController.addPost);
 // Delete a Post
 router.route('/posts/:postId').get(PostController.deletePost);
 
+// Update a Post's body
+router.route('/posts/:postId').put(PostController.updatePost);
+
+
 module.exports = router;

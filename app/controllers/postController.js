@@ -53,6 +53,9 @@ export function getPosts(req, res) {
  */
 export function getPost(req, res) {
 	Post.findOne({ title: req.params.postId }).exec(function (err, post) {
+		if (!post) {
+			res.status(409).send({ message: 'Post Not Found' })
+		}
 		if (err) {
 			res.send(err)
 		}
@@ -71,12 +74,41 @@ export function getPost(req, res) {
  */
 export function deletePost(req, res) {
 	Post.findOne({ title: req.params.postId }).exec((err, post) => {
+		if (!post) {
+			res.status(409).send({ message: 'Post Not Found' })
+		}
 		if (err) {
 			res.status(500).send(err)
 		}
-
-		post.remove(() => {
-			res.status(200).end()
-		})
+		else {
+			post.remove(() => {
+				res.status(200).end()
+			})
+		}
 	})
+}
+
+/**
+ * PUT /api/posts/:postId
+ * Update a post's body
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function updatePost(req, res) {
+	if(req.body.body != null) {
+	Post.findOne({ title: req.params.postId }).exec((err, post) => {
+		if(err){
+			res.status(500).send(err)
+		}
+
+		post.body = req.body.body
+		post.save(function (err, updatedPost) {
+			if (err) return handleError(err);
+			res.send(updatedPost);
+		});
+	})
+	} else {
+		res.status(409).send({ message: 'Please provide body text' })
+	}
 }
