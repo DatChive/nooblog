@@ -29,14 +29,18 @@ class Header extends React.Component {
   render() {
     return (
       <nav className='navbar navbar-default navbar-static-top'>
-        <ul className='nav navbar-nav'>
+        <ul className='nav navbar-nav col-md-3'>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/new'>New Post</Link></li>
         </ul>
-        <div className='navbar-header'>
+        <div className='navbar-header col-md-5'>
           <Link to='/' className='navbar-brand'>
-            Welcome to Nooblog | [{this.state.connections}] User(s) Online
+            <p>Welcome to Nooblog | [{this.state.connections}] User(s) Online</p>
           </Link>
+        </div>
+        <div className="nav navbar-nav col-md-4">
+          <li><Link to='/'>Login</Link></li>
+          <li><Link to='/'>Register</Link></li>
         </div>
       </nav>
     );
