@@ -8,7 +8,6 @@ export function connectDB() {
 	return mongoose.connect(config.databaseURI, null, (err) => {
 		if (err) {
 			console.log('MongoDB connection error: ' + err)
-			// made this 0 so the console doesn't barf 20 lines of 
 			process.exit(0);
 		}
 	})
@@ -32,13 +31,11 @@ mongoose.connection.on('disconnected', () => {
 
 // If the Node process ends, close the Mongoose connection
 process.on('SIGINT', () => {
-	mongoose.connection.close( () => {
+	mongoose.connection.close(() => {
 		console.log('Mongoose default connection disconnected through app termination')
 		process.exit(0)
-	});
-});
+	})
+})
 
-// BRING IN YOUR SCHEMAS & MODELS // For example
+// Load Schemas/Models
 require('./models/post')
-
-
